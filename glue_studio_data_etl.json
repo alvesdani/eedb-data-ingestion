@@ -1,0 +1,1761 @@
+{
+	"jobConfig": {
+		"name": "bancos-data-etl",
+		"description": "",
+		"role": "arn:aws:iam::767397689584:role/temp-role-glue-studio",
+		"command": "glueetl",
+		"version": "4.0",
+		"runtime": null,
+		"workerType": "G.1X",
+		"numberOfWorkers": 10,
+		"maxCapacity": 10,
+		"maxRetries": 0,
+		"timeout": 2880,
+		"maxConcurrentRuns": 1,
+		"security": "none",
+		"scriptName": "bancos-data-etl.py",
+		"scriptLocation": "s3://aws-glue-assets-767397689584-us-east-1/scripts/",
+		"language": "python-3",
+		"spark": true,
+		"sparkConfiguration": "standard",
+		"jobParameters": [],
+		"tags": [],
+		"jobMode": "VISUAL_MODE",
+		"createdOn": "2024-08-06T01:11:59.778Z",
+		"developerMode": false,
+		"connectionsList": [
+			"eedb-target-db-conn"
+		],
+		"temporaryDirectory": "s3://aws-glue-assets-767397689584-us-east-1/temporary/",
+		"logging": true,
+		"glueHiveMetastore": true,
+		"etlAutoTuning": false,
+		"metrics": true,
+		"observabilityMetrics": true,
+		"bookmark": "job-bookmark-disable",
+		"sparkPath": "s3://aws-glue-assets-767397689584-us-east-1/sparkHistoryLogs/",
+		"flexExecution": false,
+		"minFlexWorkers": null,
+		"maintenanceWindow": null,
+		"pythonPath": ""
+	},
+	"dag": {
+		"node-1722920300485": {
+			"nodeId": "node-1722920300485",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722919824175"
+			],
+			"name": "empregados-target",
+			"generatedNodeName": "empregadostarget_node1722920300485",
+			"classification": "DataSink",
+			"type": "PostgresSQL",
+			"streamingBatchInterval": 100,
+			"database": "eedb-bancos",
+			"format": null,
+			"partitionKeys": [],
+			"calculatedType": "",
+			"codeGenVersion": 2,
+			"table": "postgres_public_empregados"
+		},
+		"node-1722905739189": {
+			"nodeId": "node-1722905739189",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [],
+			"name": "empregados-less-soure-s3",
+			"generatedNodeName": "empregadoslesssoures3_node1722905739189",
+			"classification": "DataSource",
+			"type": "S3",
+			"isCatalog": false,
+			"format": "csv",
+			"paths": [
+				"s3://eedb-data-lake/Empregados/glassdoor_consolidado_join_match_less_v2.csv"
+			],
+			"compressionType": null,
+			"exclusions": [],
+			"groupFiles": null,
+			"groupSize": null,
+			"recurse": true,
+			"maxBand": null,
+			"maxFilesInBand": null,
+			"additionalOptions": {
+				"boundedSize": null,
+				"boundedFiles": null,
+				"enableSamplePath": false,
+				"samplePath": "s3://eedb-data-lake/Empregados/glassdoor_consolidado_join_match_less_v2.csv",
+				"boundedOption": null
+			},
+			"separator": "|",
+			"escaper": "",
+			"quoteChar": "\"",
+			"multiline": null,
+			"withHeader": true,
+			"writeHeader": null,
+			"skipFirst": null,
+			"outputSchemas": [
+				[
+					{
+						"key": "employer_name",
+						"fullPath": [
+							"employer_name"
+						],
+						"type": "string"
+					},
+					{
+						"key": "reviews_count",
+						"fullPath": [
+							"reviews_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "culture_count",
+						"fullPath": [
+							"culture_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "salaries_count",
+						"fullPath": [
+							"salaries_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "benefits_count",
+						"fullPath": [
+							"benefits_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-website",
+						"fullPath": [
+							"employer-website"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-headquarters",
+						"fullPath": [
+							"employer-headquarters"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-founded",
+						"fullPath": [
+							"employer-founded"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-industry",
+						"fullPath": [
+							"employer-industry"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-revenue",
+						"fullPath": [
+							"employer-revenue"
+						],
+						"type": "string"
+					},
+					{
+						"key": "url",
+						"fullPath": [
+							"url"
+						],
+						"type": "string"
+					},
+					{
+						"key": "geral",
+						"fullPath": [
+							"geral"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cultura e valores",
+						"fullPath": [
+							"cultura e valores"
+						],
+						"type": "string"
+					},
+					{
+						"key": "diversidade e inclusão",
+						"fullPath": [
+							"diversidade e inclusão"
+						],
+						"type": "string"
+					},
+					{
+						"key": "qualidade de vida",
+						"fullPath": [
+							"qualidade de vida"
+						],
+						"type": "string"
+					},
+					{
+						"key": "alta liderança",
+						"fullPath": [
+							"alta liderança"
+						],
+						"type": "string"
+					},
+					{
+						"key": "remuneração e benefícios",
+						"fullPath": [
+							"remuneração e benefícios"
+						],
+						"type": "string"
+					},
+					{
+						"key": "oportunidades de carreira",
+						"fullPath": [
+							"oportunidades de carreira"
+						],
+						"type": "string"
+					},
+					{
+						"key": "recomendam para outras pessoas(%)",
+						"fullPath": [
+							"recomendam para outras pessoas(%)"
+						],
+						"type": "string"
+					},
+					{
+						"key": "perspectiva positiva da empresa(%)",
+						"fullPath": [
+							"perspectiva positiva da empresa(%)"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cnpj",
+						"fullPath": [
+							"cnpj"
+						],
+						"type": "string"
+					},
+					{
+						"key": "nome",
+						"fullPath": [
+							"nome"
+						],
+						"type": "string"
+					},
+					{
+						"key": "match_percent",
+						"fullPath": [
+							"match_percent"
+						],
+						"type": "string"
+					}
+				]
+			],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1722906723972": {
+			"nodeId": "node-1722906723972",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [],
+			"name": "empregados-match-source-s3",
+			"generatedNodeName": "empregadosmatchsources3_node1722906723972",
+			"classification": "DataSource",
+			"type": "S3",
+			"isCatalog": false,
+			"format": "csv",
+			"paths": [
+				"s3://eedb-data-lake/Empregados/glassdoor_consolidado_join_match_v2.csv"
+			],
+			"compressionType": null,
+			"exclusions": [],
+			"groupFiles": null,
+			"groupSize": null,
+			"recurse": true,
+			"maxBand": null,
+			"maxFilesInBand": null,
+			"additionalOptions": {
+				"boundedSize": null,
+				"boundedFiles": null,
+				"enableSamplePath": false,
+				"samplePath": "s3://eedb-data-lake/Empregados/glassdoor_consolidado_join_match_v2.csv",
+				"boundedOption": null
+			},
+			"separator": "|",
+			"escaper": "",
+			"quoteChar": "\"",
+			"multiline": null,
+			"withHeader": true,
+			"writeHeader": null,
+			"skipFirst": null,
+			"optimizePerformance": false,
+			"outputSchemas": [
+				[
+					{
+						"key": "employer_name",
+						"fullPath": [
+							"employer_name"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "reviews_count",
+						"fullPath": [
+							"reviews_count"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "culture_count",
+						"fullPath": [
+							"culture_count"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "salaries_count",
+						"fullPath": [
+							"salaries_count"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "benefits_count",
+						"fullPath": [
+							"benefits_count"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "employer-website",
+						"fullPath": [
+							"employer-website"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "employer-headquarters",
+						"fullPath": [
+							"employer-headquarters"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "employer-founded",
+						"fullPath": [
+							"employer-founded"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "employer-industry",
+						"fullPath": [
+							"employer-industry"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "employer-revenue",
+						"fullPath": [
+							"employer-revenue"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "url",
+						"fullPath": [
+							"url"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "geral",
+						"fullPath": [
+							"geral"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "cultura e valores",
+						"fullPath": [
+							"cultura e valores"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "diversidade e inclusão",
+						"fullPath": [
+							"diversidade e inclusão"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "qualidade de vida",
+						"fullPath": [
+							"qualidade de vida"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "alta liderança",
+						"fullPath": [
+							"alta liderança"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "remuneração e benefícios",
+						"fullPath": [
+							"remuneração e benefícios"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "oportunidades de carreira",
+						"fullPath": [
+							"oportunidades de carreira"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "recomendam para outras pessoas(%)",
+						"fullPath": [
+							"recomendam para outras pessoas(%)"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "perspectiva positiva da empresa(%)",
+						"fullPath": [
+							"perspectiva positiva da empresa(%)"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "segmento",
+						"fullPath": [
+							"segmento"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "nome",
+						"fullPath": [
+							"nome"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "match_percent",
+						"fullPath": [
+							"match_percent"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					}
+				]
+			],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1722966763081": {
+			"nodeId": "node-1722966763081",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [],
+			"name": "reclamacoes-source-s3",
+			"generatedNodeName": "reclamacoessources3_node1722966763081",
+			"classification": "DataSource",
+			"type": "S3",
+			"isCatalog": false,
+			"format": "csv",
+			"paths": [
+				"s3://eedb-data-lake/Reclamacoes/corrigido/"
+			],
+			"compressionType": null,
+			"exclusions": [],
+			"groupFiles": null,
+			"groupSize": null,
+			"recurse": true,
+			"maxBand": null,
+			"maxFilesInBand": null,
+			"additionalOptions": {
+				"boundedSize": null,
+				"boundedFiles": null,
+				"enableSamplePath": false,
+				"samplePath": "s3://eedb-data-lake/Reclamacoes/corrigido/part-00000-26728236-0861-44a2-ba08-5ea57ff274e5-c000.csv",
+				"boundedOption": null
+			},
+			"separator": ";",
+			"escaper": "",
+			"quoteChar": "\"",
+			"multiline": null,
+			"withHeader": true,
+			"writeHeader": null,
+			"skipFirst": null,
+			"optimizePerformance": false,
+			"outputSchemas": [
+				[
+					{
+						"key": "ano",
+						"fullPath": [
+							"ano"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "trimestre",
+						"fullPath": [
+							"trimestre"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "categoria",
+						"fullPath": [
+							"categoria"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "tipo",
+						"fullPath": [
+							"tipo"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "cnpj if",
+						"fullPath": [
+							"cnpj if"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "instituição financeira",
+						"fullPath": [
+							"instituição financeira"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "índice",
+						"fullPath": [
+							"índice"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade de reclamações reguladas procedentes",
+						"fullPath": [
+							"quantidade de reclamações reguladas procedentes"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade de reclamações reguladas - outras",
+						"fullPath": [
+							"quantidade de reclamações reguladas - outras"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade de reclamações não reguladas",
+						"fullPath": [
+							"quantidade de reclamações não reguladas"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade total de reclamações",
+						"fullPath": [
+							"quantidade total de reclamações"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade total de clientes  ccs e scr",
+						"fullPath": [
+							"quantidade total de clientes  ccs e scr"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade de clientes  ccs",
+						"fullPath": [
+							"quantidade de clientes  ccs"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "quantidade de clientes  scr",
+						"fullPath": [
+							"quantidade de clientes  scr"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "_c14",
+						"fullPath": [
+							"_c14"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					}
+				]
+			],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1722960699045": {
+			"nodeId": "node-1722960699045",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722960681308"
+			],
+			"name": "bancos-target",
+			"generatedNodeName": "bancostarget_node1722960699045",
+			"classification": "DataSink",
+			"type": "PostgresSQL",
+			"streamingBatchInterval": 100,
+			"database": "eedb-bancos",
+			"table": "postgres_public_bancos",
+			"format": null,
+			"partitionKeys": [],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1722960681308": {
+			"nodeId": "node-1722960681308",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722905402534"
+			],
+			"name": "Change Schema",
+			"generatedNodeName": "ChangeSchema_node1722960681308",
+			"classification": "Transform",
+			"type": "ApplyMapping",
+			"mapping": [
+				{
+					"toKey": "segmento",
+					"fromPath": [
+						"segmento"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "cnpj",
+					"fromPath": [
+						"cnpj"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "nome",
+					"fromPath": [
+						"nome"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				}
+			],
+			"parentsValid": true,
+			"calculatedType": "",
+			"codeGenVersion": 2,
+			"outputSchemas": [
+				[
+					{
+						"key": "segmento",
+						"fullPath": [
+							"segmento"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cnpj",
+						"fullPath": [
+							"cnpj"
+						],
+						"type": "string"
+					},
+					{
+						"key": "nome",
+						"fullPath": [
+							"nome"
+						],
+						"type": "string"
+					}
+				]
+			]
+		},
+		"node-1722919824175": {
+			"nodeId": "node-1722919824175",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722908831012"
+			],
+			"name": "Change Schema",
+			"generatedNodeName": "ChangeSchema_node1722919824175",
+			"classification": "Transform",
+			"type": "ApplyMapping",
+			"mapping": [
+				{
+					"toKey": "employer_name",
+					"fromPath": [
+						"employer_name"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "reviews_count",
+					"fromPath": [
+						"reviews_count"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "culture_count",
+					"fromPath": [
+						"culture_count"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "salaries_count",
+					"fromPath": [
+						"salaries_count"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "benefits_count",
+					"fromPath": [
+						"benefits_count"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "employer_website",
+					"fromPath": [
+						"employer-website"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "employer_headquarters",
+					"fromPath": [
+						"employer-headquarters"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "employer_founded",
+					"fromPath": [
+						"employer-founded"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "employer_industry",
+					"fromPath": [
+						"employer-industry"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "employer_revenue",
+					"fromPath": [
+						"employer-revenue"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "url",
+					"fromPath": [
+						"url"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "geral",
+					"fromPath": [
+						"Geral"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "cultura_e_valores",
+					"fromPath": [
+						"Cultura e valores"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "diversidade_e_inclusao",
+					"fromPath": [
+						"Diversidade e inclusão"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "qualidade_de_vida",
+					"fromPath": [
+						"Qualidade de vida"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "alta_lideranca",
+					"fromPath": [
+						"Alta liderança"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "remuneracao_e_beneficios",
+					"fromPath": [
+						"Remuneração e benefícios"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "oportunidades_de_carreira",
+					"fromPath": [
+						"Oportunidades de carreira"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "recomendam_para_outras_pessoas",
+					"fromPath": [
+						"Recomendam para outras pessoas(%)"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "perspectiva_positiva_da_empresa",
+					"fromPath": [
+						"Perspectiva positiva da empresa(%)"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "cnpj",
+					"fromPath": [
+						"CNPJ"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "nome",
+					"fromPath": [
+						"Nome"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				},
+				{
+					"toKey": "match_percent",
+					"fromPath": [
+						"match_percent"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "segmento",
+					"fromPath": [
+						"Segmento"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false
+				}
+			],
+			"parentsValid": true,
+			"calculatedType": "",
+			"codeGenVersion": 2,
+			"outputSchemas": [
+				[
+					{
+						"key": "employer_name",
+						"fullPath": [
+							"employer_name"
+						],
+						"type": "string"
+					},
+					{
+						"key": "reviews_count",
+						"fullPath": [
+							"reviews_count"
+						],
+						"type": "int"
+					},
+					{
+						"key": "culture_count",
+						"fullPath": [
+							"culture_count"
+						],
+						"type": "int"
+					},
+					{
+						"key": "salaries_count",
+						"fullPath": [
+							"salaries_count"
+						],
+						"type": "int"
+					},
+					{
+						"key": "benefits_count",
+						"fullPath": [
+							"benefits_count"
+						],
+						"type": "int"
+					},
+					{
+						"key": "employer_website",
+						"fullPath": [
+							"employer_website"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer_headquarters",
+						"fullPath": [
+							"employer_headquarters"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer_founded",
+						"fullPath": [
+							"employer_founded"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer_industry",
+						"fullPath": [
+							"employer_industry"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer_revenue",
+						"fullPath": [
+							"employer_revenue"
+						],
+						"type": "string"
+					},
+					{
+						"key": "url",
+						"fullPath": [
+							"url"
+						],
+						"type": "string"
+					},
+					{
+						"key": "geral",
+						"fullPath": [
+							"geral"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cultura_e_valores",
+						"fullPath": [
+							"cultura_e_valores"
+						],
+						"type": "string"
+					},
+					{
+						"key": "diversidade_e_inclusao",
+						"fullPath": [
+							"diversidade_e_inclusao"
+						],
+						"type": "string"
+					},
+					{
+						"key": "qualidade_de_vida",
+						"fullPath": [
+							"qualidade_de_vida"
+						],
+						"type": "string"
+					},
+					{
+						"key": "alta_lideranca",
+						"fullPath": [
+							"alta_lideranca"
+						],
+						"type": "string"
+					},
+					{
+						"key": "remuneracao_e_beneficios",
+						"fullPath": [
+							"remuneracao_e_beneficios"
+						],
+						"type": "string"
+					},
+					{
+						"key": "oportunidades_de_carreira",
+						"fullPath": [
+							"oportunidades_de_carreira"
+						],
+						"type": "string"
+					},
+					{
+						"key": "recomendam_para_outras_pessoas",
+						"fullPath": [
+							"recomendam_para_outras_pessoas"
+						],
+						"type": "string"
+					},
+					{
+						"key": "perspectiva_positiva_da_empresa",
+						"fullPath": [
+							"perspectiva_positiva_da_empresa"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cnpj",
+						"fullPath": [
+							"cnpj"
+						],
+						"type": "string"
+					},
+					{
+						"key": "nome",
+						"fullPath": [
+							"nome"
+						],
+						"type": "string"
+					},
+					{
+						"key": "match_percent",
+						"fullPath": [
+							"match_percent"
+						],
+						"type": "string"
+					},
+					{
+						"key": "segmento",
+						"fullPath": [
+							"segmento"
+						],
+						"type": "string"
+					}
+				]
+			]
+		},
+		"node-1722972483781": {
+			"nodeId": "node-1722972483781",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722966835296"
+			],
+			"name": "reclamacoes-target",
+			"generatedNodeName": "reclamacoestarget_node1722972483781",
+			"classification": "DataSink",
+			"type": "PostgresSQL",
+			"streamingBatchInterval": 100,
+			"database": "eedb-bancos",
+			"format": null,
+			"partitionKeys": [],
+			"calculatedType": "",
+			"codeGenVersion": 2,
+			"table": "postgres_public_reclamacoes"
+		},
+		"node-1722905402534": {
+			"nodeId": "node-1722905402534",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [],
+			"name": "bancos-source-s3",
+			"generatedNodeName": "bancossources3_node1722905402534",
+			"classification": "DataSource",
+			"type": "S3",
+			"isCatalog": false,
+			"format": "csv",
+			"paths": [
+				"s3://eedb-data-lake/Bancos/EnquadramentoInicia_v2.tsv"
+			],
+			"compressionType": null,
+			"exclusions": [],
+			"groupFiles": null,
+			"groupSize": null,
+			"recurse": true,
+			"maxBand": null,
+			"maxFilesInBand": null,
+			"additionalOptions": {
+				"boundedSize": null,
+				"boundedFiles": null,
+				"enableSamplePath": false,
+				"samplePath": "s3://eedb-data-lake/Bancos/EnquadramentoInicia_v2.tsv",
+				"boundedOption": null
+			},
+			"separator": "\t",
+			"escaper": "",
+			"quoteChar": "\"",
+			"multiline": null,
+			"withHeader": true,
+			"writeHeader": null,
+			"skipFirst": null,
+			"outputSchemas": [
+				[
+					{
+						"key": "segmento",
+						"fullPath": [
+							"segmento"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cnpj",
+						"fullPath": [
+							"cnpj"
+						],
+						"type": "string"
+					},
+					{
+						"key": "nome",
+						"fullPath": [
+							"nome"
+						],
+						"type": "string"
+					}
+				]
+			],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1722908831012": {
+			"nodeId": "node-1722908831012",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722905739189",
+				"node-1722906723972"
+			],
+			"name": "Join",
+			"generatedNodeName": "Join_node1722908831012",
+			"classification": "Transform",
+			"type": "Join",
+			"joinType": "right",
+			"columns": [
+				{
+					"from": "node-1722905739189",
+					"keys": [
+						"employer_name"
+					]
+				},
+				{
+					"from": "node-1722906723972",
+					"keys": [
+						"employer_name"
+					]
+				}
+			],
+			"columnConditions": [
+				"="
+			],
+			"parentsValid": true,
+			"calculatedType": "",
+			"codeGenVersion": 2,
+			"outputSchemas": [
+				[
+					{
+						"key": "employer_name",
+						"fullPath": [
+							"employer_name"
+						],
+						"type": "string"
+					},
+					{
+						"key": "reviews_count",
+						"fullPath": [
+							"reviews_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "culture_count",
+						"fullPath": [
+							"culture_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "salaries_count",
+						"fullPath": [
+							"salaries_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "benefits_count",
+						"fullPath": [
+							"benefits_count"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-website",
+						"fullPath": [
+							"employer-website"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-headquarters",
+						"fullPath": [
+							"employer-headquarters"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-founded",
+						"fullPath": [
+							"employer-founded"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-industry",
+						"fullPath": [
+							"employer-industry"
+						],
+						"type": "string"
+					},
+					{
+						"key": "employer-revenue",
+						"fullPath": [
+							"employer-revenue"
+						],
+						"type": "string"
+					},
+					{
+						"key": "url",
+						"fullPath": [
+							"url"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Geral",
+						"fullPath": [
+							"Geral"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Cultura e valores",
+						"fullPath": [
+							"Cultura e valores"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Diversidade e inclusão",
+						"fullPath": [
+							"Diversidade e inclusão"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Qualidade de vida",
+						"fullPath": [
+							"Qualidade de vida"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Alta liderança",
+						"fullPath": [
+							"Alta liderança"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Remuneração e benefícios",
+						"fullPath": [
+							"Remuneração e benefícios"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Oportunidades de carreira",
+						"fullPath": [
+							"Oportunidades de carreira"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Recomendam para outras pessoas(%)",
+						"fullPath": [
+							"Recomendam para outras pessoas(%)"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Perspectiva positiva da empresa(%)",
+						"fullPath": [
+							"Perspectiva positiva da empresa(%)"
+						],
+						"type": "string"
+					},
+					{
+						"key": "CNPJ",
+						"fullPath": [
+							"CNPJ"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Nome",
+						"fullPath": [
+							"Nome"
+						],
+						"type": "string"
+					},
+					{
+						"key": "match_percent",
+						"fullPath": [
+							"match_percent"
+						],
+						"type": "string"
+					},
+					{
+						"key": "Segmento",
+						"fullPath": [
+							"Segmento"
+						],
+						"type": "string"
+					}
+				]
+			]
+		},
+		"node-1722966835296": {
+			"nodeId": "node-1722966835296",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1722966763081"
+			],
+			"name": "Change Schema",
+			"generatedNodeName": "ChangeSchema_node1722966835296",
+			"classification": "Transform",
+			"type": "ApplyMapping",
+			"mapping": [
+				{
+					"toKey": "ano",
+					"fromPath": [
+						"ano"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "trimestre",
+					"fromPath": [
+						"trimestre"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "categoria",
+					"fromPath": [
+						"categoria"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "tipo",
+					"fromPath": [
+						"tipo"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "cnpj_if",
+					"fromPath": [
+						"cnpj if"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "instituicao_financeira",
+					"fromPath": [
+						"instituição financeira"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "indice",
+					"fromPath": [
+						"índice"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_de_reclamacoes_reguladas_procedente",
+					"fromPath": [
+						"quantidade de reclamações reguladas procedentes"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_de_reclamacoes_reguladas_outra",
+					"fromPath": [
+						"quantidade de reclamações reguladas - outras"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_de_reclamacoes_nao_reguladas",
+					"fromPath": [
+						"quantidade de reclamações não reguladas"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_total_de_reclamacoes",
+					"fromPath": [
+						"quantidade total de reclamações"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_total_de_clientes_ccs_e_scr",
+					"fromPath": [
+						"quantidade total de clientes  ccs e scr"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_de_clientes_ccs",
+					"fromPath": [
+						"quantidade de clientes  ccs"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "quantidade_de_clientes_scr",
+					"fromPath": [
+						"quantidade de clientes  scr"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "_c14",
+					"fromPath": [
+						"_c14"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": true,
+					"children": null
+				}
+			],
+			"parentsValid": true,
+			"calculatedType": "",
+			"codeGenVersion": 2,
+			"outputSchemas": [
+				[
+					{
+						"key": "ano",
+						"fullPath": [
+							"ano"
+						],
+						"type": "string"
+					},
+					{
+						"key": "trimestre",
+						"fullPath": [
+							"trimestre"
+						],
+						"type": "string"
+					},
+					{
+						"key": "categoria",
+						"fullPath": [
+							"categoria"
+						],
+						"type": "string"
+					},
+					{
+						"key": "tipo",
+						"fullPath": [
+							"tipo"
+						],
+						"type": "string"
+					},
+					{
+						"key": "cnpj_if",
+						"fullPath": [
+							"cnpj_if"
+						],
+						"type": "string"
+					},
+					{
+						"key": "instituicao_financeira",
+						"fullPath": [
+							"instituicao_financeira"
+						],
+						"type": "string"
+					},
+					{
+						"key": "indice",
+						"fullPath": [
+							"indice"
+						],
+						"type": "string"
+					},
+					{
+						"key": "quantidade_de_reclamacoes_reguladas_procedente",
+						"fullPath": [
+							"quantidade_de_reclamacoes_reguladas_procedente"
+						],
+						"type": "int"
+					},
+					{
+						"key": "quantidade_de_reclamacoes_reguladas_outra",
+						"fullPath": [
+							"quantidade_de_reclamacoes_reguladas_outra"
+						],
+						"type": "int"
+					},
+					{
+						"key": "quantidade_de_reclamacoes_nao_reguladas",
+						"fullPath": [
+							"quantidade_de_reclamacoes_nao_reguladas"
+						],
+						"type": "int"
+					},
+					{
+						"key": "quantidade_total_de_reclamacoes",
+						"fullPath": [
+							"quantidade_total_de_reclamacoes"
+						],
+						"type": "int"
+					},
+					{
+						"key": "quantidade_total_de_clientes_ccs_e_scr",
+						"fullPath": [
+							"quantidade_total_de_clientes_ccs_e_scr"
+						],
+						"type": "int"
+					},
+					{
+						"key": "quantidade_de_clientes_ccs",
+						"fullPath": [
+							"quantidade_de_clientes_ccs"
+						],
+						"type": "int"
+					},
+					{
+						"key": "quantidade_de_clientes_scr",
+						"fullPath": [
+							"quantidade_de_clientes_scr"
+						],
+						"type": "int"
+					}
+				]
+			]
+		}
+	},
+	"hasBeenSaved": false,
+	"usageProfileName": null
+}
